@@ -1,24 +1,14 @@
-import { Command } from "commander";
+import { Command } from 'commander';
+import { mainFlow } from '../main.js';
 
 const program = new Command();
 
 program
-    .name("syc")
-    .description("manage your dotfile and env")
-    .version("0.0.1");
-
-program
-    .command("greet <name>")
-    .description("Greet someone")
-    .action((name) => {
-        console.log(`Hello, ${name}!`);
-    });
-
-program
-    .command("init")
-    .description("Initialize configuration")
-    .action(() => {
-        console.log("Initializing...");
-    });
+  .name('syc')
+  .description('dotfile config manager — 管理你的配置文件和环境变量')
+  .version('0.0.1')
+  .action(async () => {
+    await mainFlow();
+  });
 
 export default program;
