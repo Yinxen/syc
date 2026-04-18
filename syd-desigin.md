@@ -1,7 +1,7 @@
 # DotFile Config Manage (syc) ： linux 配置文件管理
 ## 配置文件软链接管理 
   ### 链接配置 
-    链接到 ~/.dc/xxx/xxx
+    链接到 ~/.syc/xxx/xxx
   ### 还原配置 
     将（symlink）还原成真实的文件或文件夹
 
@@ -31,7 +31,7 @@ symlinks:{
 }
 orgiginal_config_paths 是所有注册在 symlinks 的A 集合按名称排序
 
-cli ： dc
+cli ： syc
 - radio(env|symlinks|all|cancel)
   - env: 注入环境变量
     - radio(inject|uninject)
@@ -94,7 +94,7 @@ cli ： dc
     - 跳过处理，AB都保持原样
   - 
 ## config sample
-~/.dc/config.js
+~/.syc/config.js
 ```javascript
 export default {
     env:{
