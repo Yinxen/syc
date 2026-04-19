@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as p from '@clack/prompts';
-import { getPathState, getBackupName, validateOriginalPath, validateTargetPath } from '../utils/path.js';
+import { getPathState, getBackupName, validateOriginalPath, validateTargetPath, ensureParentDir } from '../utils/path.js';
 import { logger } from '../utils/logger.js';
 
 /**
@@ -94,9 +94,3 @@ export async function unlinkOne(originalPath, targetRelPath) {
   }
 }
 
-function ensureParentDir(filePath) {
-  const dir = path.dirname(filePath);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-}

@@ -1,7 +1,10 @@
 import * as p from '@clack/prompts';
 import { linkOne } from './linker.js';
 import { unlinkOne } from './unlinker.js';
+import { showStatus } from './status.js';
 import { logger } from '../utils/logger.js';
+
+export { showStatus };
 
 /** 配置文件链接管理完整交互流程 */
 export async function symlinksFlow(config) {

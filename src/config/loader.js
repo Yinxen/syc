@@ -16,8 +16,16 @@ export async function loadConfig() {
   }
 
   const configUrl = pathToFileURL(CONFIG_PATH).href;
-  // 添加时间戳避免模块缓存
-  const module = await import(`${configUrl}?t=${Date.now()}`);
+
+  let module;
+  try {
+    module = await import(`${configUrl}?t=${Date.now()}`);
+  } catch (err) {
+    logger.error(`配置文件加载失败: ${CONFIG_PATH}`);
+    logger.error(`原因: ${err.message}`);
+    process.exit(1);
+  }
+
   const config = module.default;
 
   if (!config) {

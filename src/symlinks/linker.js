@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as p from '@clack/prompts';
-import { getPathState, getBackupName, expandHome, validateOriginalPath, validateTargetPath, SYC_DIR } from '../utils/path.js';
+import { getPathState, getBackupName, expandHome, validateOriginalPath, validateTargetPath, ensureParentDir, SYC_DIR } from '../utils/path.js';
 import { logger } from '../utils/logger.js';
 
 /**
@@ -67,7 +67,7 @@ export async function linkOne(originalPath, targetRelPath) {
   // A(f|d) -> B(?): 将 A 移动到 B，创建软链接
   if (bState === '?') {
     ensureParentDir(bPath);
-    fs.renameSync(aPath, bPath);
+    moveSync(aPath, bPath);
     fs.symlinkSync(bPath, aPath);
     logger.success(`已将 ${aPath} 移动到 ${bPath} 并创建软链接`);
     return;
@@ -95,7 +95,7 @@ export async function linkOne(originalPath, targetRelPath) {
     logger.info(`已备份: ${aPath} -> ${backupPath}`);
 
     fs.rmSync(bPath, { recursive: true, force: true });
-    fs.renameSync(aPath, bPath);
+    moveSync(aPath, bPath);
     fs.symlinkSync(bPath, aPath);
     logger.success(`已将 ${aPath} 移入 ${bPath} 并创建软链接`);
   }
@@ -108,9 +108,16 @@ export async function linkOne(originalPath, targetRelPath) {
   }
 }
 
-function ensureParentDir(filePath) {
-  const dir = path.dirname(filePath);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+/** 跨文件系统安全的移动操作，renameSync 遇到 EXDEV 时回退到 copy+rm */
+function moveSync(src, dest) {
+  try {
+    fs.renameSync(src, dest);
+  } catch (err) {
+    if (err.code === 'EXDEV') {
+      fs.cpSync(src, dest, { recursive: true });
+      fs.rmSync(src, { recursive: true, force: true });
+    } else {
+      throw err;
+    }
   }
 }

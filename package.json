@@ -9,8 +9,10 @@
   },
   "scripts": {
     "dev": "node index.js",
-    "install": "pnpm link --global",
-    "install:npm": "npm install -g"
+    "link": "pnpm link --global",
+    "link:npm": "npm link",
+    "unlink": "pnpm unlink --global",
+    "unlink:npm": "npm unlink -g @yinx/syc-config"
   },
   "keywords": [],
   "author": "",

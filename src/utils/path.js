@@ -66,6 +66,14 @@ export function getPathState(filePath) {
   }
 }
 
+/** 确保父目录存在 */
+export function ensureParentDir(filePath) {
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
 /** 生成备份文件名: {filepath}-{YYMMDD_HHmmss}.dc.backup */
 export function getBackupName(filePath) {
   const now = new Date();

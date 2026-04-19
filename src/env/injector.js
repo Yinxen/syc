@@ -108,14 +108,16 @@ export function uninject(shells) {
 
     const sourceLine = getSourceLine(shell);
     const commentedLine = `# ${sourceLine}`;
+    const blockContent = content.substring(startIdx, endIdx + MARKER_END.length);
 
-    if (content.includes(commentedLine)) {
+    if (blockContent.includes(commentedLine)) {
       logger.info(`[${shell}] source 片段已被注释，无需操作: ${rcPath}`);
       continue;
     }
 
-    if (content.includes(sourceLine)) {
-      const newContent = content.replace(sourceLine, commentedLine);
+    if (blockContent.includes(sourceLine)) {
+      const newBlock = blockContent.replace(sourceLine, commentedLine);
+      const newContent = content.substring(0, startIdx) + newBlock + content.substring(endIdx + MARKER_END.length);
       fs.writeFileSync(rcPath, newContent);
       logger.success(`[${shell}] 已注释 source 片段: ${rcPath}`);
     } else {
