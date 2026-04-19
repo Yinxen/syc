@@ -5,7 +5,7 @@ export const CONFIG_TEMPLATE = `export default {
         // 声明式配置管理环境变量
         values: {
             // 'MY_VAR': 'my-value',
-            // 同时也支持通过数组去配置 PATH
+            // PATH 是唯一支持数组值的变量，用 : 拼接
             // 'PATH': [
             //     '$HOME/.local/bin',
             //     '$PATH'
