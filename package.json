@@ -1,6 +1,6 @@
 {
   "name": "@yinx-in/syc-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "这是一个私人的工具，不对外使用，使用有一定风险",
   "type": "module",
   "main": "index.js",
@@ -23,7 +23,7 @@
     "commander": "^14.0.3",
     "zod": "^4.3.6"
   },
-  "publishConfig":{
-	"access":"public"
+  "publishConfig": {
+    "access": "public"
   }
 }
