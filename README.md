@@ -5,6 +5,10 @@ Linux 下的 dotfile 配置管理工具 — 通过软链接集中管理配置文
 ## 安装
 
 ```bash
+npm install -g @yinx-in/syc-config
+```
+
+```bash
 # 克隆仓库后本地安装
 pnpm install
 pnpm run install

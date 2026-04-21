@@ -1,7 +1,7 @@
 {
-  "name": "@yinx/syc-config",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@yinx-in/syc-config",
+  "version": "1.0.1",
+  "description": "这是一个私人的工具，不对外使用，使用有一定风险",
   "type": "module",
   "main": "index.js",
   "bin": {
@@ -12,7 +12,7 @@
     "link": "pnpm link --global",
     "link:npm": "npm link",
     "unlink": "pnpm unlink --global",
-    "unlink:npm": "npm unlink -g @yinx/syc-config"
+    "unlink:npm": "npm unlink -g @yinx-in/syc-config"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,8 @@
     "@clack/prompts": "^1.2.0",
     "commander": "^14.0.3",
     "zod": "^4.3.6"
+  },
+  "publishConfig":{
+	"access":"public"
   }
 }
